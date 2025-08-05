@@ -439,10 +439,12 @@ void handleMenuBack() {
       break;
     case MENU_LED_PATTERN:
     case MENU_LED_BRIGHTNESS:
+      if (currentMenu == MENU_LED_PATTERN) {
+        exitPatternMenu(false);  // Don't save, restore original
+      }
       currentMenu = MENU_DISPLAY_SETTINGS;
       menuSelection = 0;
       menuOffset = 0;
-      Serial.println(F("[Menu] Returning to display settings"));
       break;
     case MENU_FREQUENCY_SELECT:
       currentMenu = previousMenu;
@@ -692,13 +694,11 @@ void handleMenuSelect() {
       break;
       
     case MENU_LED_PATTERN:
-      idlePattern = (IdlePattern)menuSelection;
-      pixelMode = PIXEL_IDLE;
+      exitPatternMenu(true);  // Save the previewed pattern
       saveSettings();
       currentMenu = MENU_DISPLAY_SETTINGS;
       menuSelection = 0;
       menuOffset = 0;
-      Serial.printf("[Menu] LED pattern changed to %d\n", idlePattern);
       break;
       
     case MENU_FREQUENCY_SELECT:
@@ -723,7 +723,7 @@ int getMaxMenuItems() {
     case MENU_TESLA: return 2;
     case MENU_SETTINGS: return 5;
     case MENU_DISPLAY_SETTINGS: return 3;
-    case MENU_LED_PATTERN: return 8;
+    case MENU_LED_PATTERN: return 35;
     case MENU_RX_CONFIG: return 4;
     case MENU_TX_CONFIG: return 4;
     case MENU_TX_BINARY: return 4;  // Added for binary TX submenu

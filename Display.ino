@@ -265,7 +265,16 @@ void drawDisplaySettings() {
 }
 
 void drawLEDPatternMenu() {
-  Serial.println(F("[Display] Drawing LED Pattern menu"));
+  Serial.printf("[Display] Drawing LED Pattern menu, selection: %d\n", menuSelection);
+  
+  if (!inPatternPreview) {
+    savedPattern = idlePattern;
+    inPatternPreview = true;
+  }
+  
+  previewPattern = (IdlePattern)menuSelection;
+  idlePattern = previewPattern;
+  pixelMode = PIXEL_IDLE;
   
   display.setTextSize(1);
   display.setTextColor(SH110X_WHITE);
@@ -279,13 +288,62 @@ void drawLEDPatternMenu() {
     "Scanner",
     "Sparkle",
     "Fire",
-    "Ocean",
+    "Ocean", 
     "Matrix",
+    "SuperGay",
+    "Red",
+    "Green",
+    "Blue",
+    "White",
+    "Magenta",
+    "Cyan",
+    "Yellow",
+    "Orange",
+    "Neon Pulse",
+    "Plasma",
+    "Meteor Rain",
+    "Twinkle",
+    "Vaporwave",
+    "Police",
+    "Pirate Ship",
+    "Theater Chase",
+    "Running Lights",
+    "Bouncing Balls",
+    "Heartbeat",
+    "Strobe",
+    "Cylon",
+    "Snow Sparkle",
+    "Pacifica",
+    "Lava Lamp",
+    "Lightning",
+    "Confetti",
     "Off"
   };
   
-  int itemCount = 8;
+  int itemCount = 35;
   drawMenuItems(menuItems, itemCount);
+  
+  display.setCursor(0, 56);
+  display.setTextSize(1);
+  display.print(F("Now: "));
+  if(menuSelection < itemCount) {
+    display.print(menuItems[menuSelection]);
+  }
+}
+
+// Add this function to handle exiting the pattern menu
+void exitPatternMenu(bool save) {
+  if (inPatternPreview) {
+    if (save) {
+      // Keep the previewed pattern
+      Serial.printf("[Display] Saving pattern: %d\n", previewPattern);
+    } else {
+      // Restore the original pattern
+      idlePattern = savedPattern;
+      Serial.printf("[Display] Restoring pattern: %d\n", savedPattern);
+    }
+    inPatternPreview = false;
+  }
 }
 
 void drawBrightnessMenu() {

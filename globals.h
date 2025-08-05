@@ -91,6 +91,33 @@ enum IdlePattern {
   PATTERN_FIRE,
   PATTERN_OCEAN,
   PATTERN_MATRIX,
+  PATTERN_SUPERGAY,
+  PATTERN_SOLID_RED,
+  PATTERN_SOLID_GREEN,
+  PATTERN_SOLID_BLUE,
+  PATTERN_SOLID_WHITE,
+  PATTERN_SOLID_MAGENTA,
+  PATTERN_SOLID_CYAN,
+  PATTERN_SOLID_YELLOW,
+  PATTERN_SOLID_ORANGE,
+  PATTERN_NEON,
+  PATTERN_PLASMA,
+  PATTERN_METEOR,
+  PATTERN_TWINKLE,
+  PATTERN_VAPORWAVE,
+  PATTERN_POLICE,
+  PATTERN_PIRATE,
+  PATTERN_THEATER,
+  PATTERN_RUNNING,
+  PATTERN_BOUNCING,
+  PATTERN_HEARTBEAT,
+  PATTERN_STROBE,
+  PATTERN_CYLON,
+  PATTERN_SNOW,
+  PATTERN_PACIFICA,
+  PATTERN_LAVA,
+  PATTERN_LIGHTNING,
+  PATTERN_CONFETTI,
   PATTERN_OFF
 };
 
@@ -145,6 +172,11 @@ extern int teslaDelay;
 // Jammer configuration
 extern int jammerPower;
 extern bool jammerSweep;
+
+// LED Pattern preview state
+extern IdlePattern previewPattern;
+extern IdlePattern savedPattern;
+extern bool inPatternPreview;
 
 // Credits
 extern unsigned long lastCreditScroll;

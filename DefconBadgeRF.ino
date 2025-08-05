@@ -26,6 +26,11 @@ IdlePattern idlePattern = PATTERN_BREATHE;
 uint8_t ledBrightness = 50;
 PixelMode pixelMode = PIXEL_IDLE;
 
+// LED Pattern preview state
+IdlePattern previewPattern = PATTERN_BREATHE;
+IdlePattern savedPattern = PATTERN_BREATHE;
+bool inPatternPreview = false;
+
 String raw_rx = "0";
 String jammer_tx = "0";
 unsigned long sample[SAMPLE_SIZE];
